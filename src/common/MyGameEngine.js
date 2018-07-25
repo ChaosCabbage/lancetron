@@ -20,9 +20,22 @@ export default class MyGameEngine extends GameEngine {
         super.start();
 
         this.worldSettings = {
-            width: 400,
-            height: 400
+            width: 15,
+            height: 15
         };
+
+        this.on('playerJoined', player => {
+            console.log("onPlayerJoined(", player, ")")
+            const p = new PlayerAvatar(this);
+            p.playerId = player.playerId;
+            p.position.x = 3.5
+            p.position.y = 3.5
+            p.velocity.x = 0.02
+            this.addObjectToWorld(p)
+        })
+
+        this.on('postStep', () => {})
+
     }
 
     processInput(inputData, playerId) {
@@ -30,7 +43,7 @@ export default class MyGameEngine extends GameEngine {
         super.processInput(inputData, playerId);
 
         // get the player's primary object
-        let player = this.world.getPlayerObject(playerId);
+        let player = this.world.queryObject({});
         if (player) {
             console.log(`player ${playerId} pressed ${inputData.input}`);
             if (inputData.input === 'up') {
@@ -41,9 +54,6 @@ export default class MyGameEngine extends GameEngine {
                 player.isRotatingRight = true;
             } else if (inputData.input === 'left') {
                 player.isRotatingLeft = true;
-            } else if (inputData.input === 'space') {
-                this.fire(player, inputData.messageIndex);
-                this.emit('fire');
             }
         }
     }

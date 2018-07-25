@@ -12,7 +12,6 @@ export default class MyClientEngine extends ClientEngine {
         this.controls.bindKey('down', 'down', { repeat: true } );
         this.controls.bindKey('left', 'left', { repeat: true });
         this.controls.bindKey('right', 'right', { repeat: true });
-        this.controls.bindKey('space', 'space');
     }
 
 }

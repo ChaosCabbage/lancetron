@@ -1,5 +1,5 @@
 node_modules
-dist/bundle.js
+public/dist/bundle.js
 .idea/*
 yarn.lock
 yarn-error.log

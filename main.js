@@ -5,12 +5,10 @@ import socketIO from 'socket.io';
 import path from 'path';
 
 const PORT = process.env.PORT || 3000;
-const INDEX = path.join(__dirname, './index.html');
 
 // define routes and socket
 const server = express();
-server.get('/', function(req, res) { res.sendFile(INDEX); });
-server.use('/', express.static(path.join(__dirname, '.')));
+server.use('/', express.static(path.join(__dirname, 'public')));
 let requestHandler = server.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 const io = socketIO(requestHandler);
 
